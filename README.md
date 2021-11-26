@@ -12,3 +12,5 @@ To get your Zone ID, log into Cloudflare and go to the overview page. On the rig
 To get your API Token, scroll down on the overview page and select "Get your API token". Then select "Create Token", select "Edit Zone DNS" and then "Use Template". Under "Zone Resources" select your domain and then "Continue to Summary". Finally select "Create Token" and copy the token. This also goes into the configuration file.
 
 Also in the configuration file is a piece of JSON for the names that you do and do not want to include in the list to be updated. 
+
+A log file is written with everything that is shown on the screen.  The log file will be called the same name as the script with .log appended to the end.
