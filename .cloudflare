@@ -1,0 +1,24 @@
+sitesJSON='{
+  "exclusions": [
+    {
+      "name": "name1.domain.com"
+    },
+    {
+      "name": "name2.domain.com"
+    }],
+  "inclusions": [
+    {
+      "name": "domain.com"
+    },
+    {
+      "name": "*.domain.com"
+    },
+    {
+      "name": "name3.domain.com"
+    }]
+}'
+zoneID="ZONE ID GOES HERE"
+token="API TOKEN GOES HERE"
+url="https://api.cloudflare.com/client/v4/zones"
+processExcludes=true
+processIncludes=false
