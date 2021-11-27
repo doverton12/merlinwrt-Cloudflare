@@ -10,6 +10,12 @@ logandlocal()
 config=$(dirname $0)/.ddns-cloudflare
 log=$(basename $0).log
 
+logandlocal "======================================================================================================================="
+logandlocal "Starting $0 script"
+logandlocal "Logfile is located at $log"
+logandlocal "Config gile is located as $config"
+logandlocal "All Parameters: $@"
+
 if [ -r $config ]; then
     logandlocal "Executing $config to load settings"
     . $config
@@ -54,6 +60,12 @@ if [ -z "$1" ]; then
     current=\"`echo $(curl -s ifconfig.me || curl -s icanhazip.com)`\"
 else
     current=\"$1\"
+    #is IP address one to ignore
+    if [ -n "$ignoreIP" ]; then
+        if [ "$1" == "ignoreIP" ]; then
+            current=\"`echo $(curl -s ifconfig.me || curl -s icanhazip.com)`\"
+        fi
+    fi
 fi
 logandlocal "This will set the IP address to $current"
 
