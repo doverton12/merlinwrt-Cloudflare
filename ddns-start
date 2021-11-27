@@ -17,9 +17,34 @@ else
     ( >&2 logandlocal "Missing or unreadable $config" )
 fi
 
+if [ -z $zoneID ]; then
+    logandlocal "The ZoneID has not been set in $config"
+    /sbin/ddns_custom_updated 0
+    exit 1
+fi
+
+if [ -z $url ]; then
+    logandlocal "The url has not been set in $config"
+    /sbin/ddns_custom_updated 0
+    exit 2
+fi
+
+if [ -z $token ]; then
+    logandlocal "The token has not been set in $config"
+    /sbin/ddns_custom_updated 0
+    exit 3
+fi
+
 #GET all A records
 recordsA=$(curl -s -X GET "${url}/${zoneID}/dns_records?type=A" -H "Authorization: Bearer ${token}" -H "Content-Type: application/json"|jq .)
 recordCount=$(echo $recordsA | jq .result_info.count)
+
+if [ $recordCount -eq 0 ]; then
+    logandlocal "Cloudflare did not return any A records"
+    /sbin/ddns_custom_updated 0
+    exit 4
+fi
+
 index=0
 
 logandlocal "$recordCount A records found on Cloudflare"
