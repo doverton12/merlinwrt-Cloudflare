@@ -62,7 +62,7 @@ else
     current=\"$1\"
     #is IP address one to ignore
     if [ -n "$ignoreIP" ]; then
-        if [ "$1" == "ignoreIP" ]; then
+        if [ "$1" == "$ignoreIP" ]; then
             current=\"`echo $(curl -s ifconfig.me || curl -s icanhazip.com)`\"
             logandlocal "Hit the IgnoreIP flag, so IP is no longer $1, but now $current"
         fi
