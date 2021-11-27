@@ -53,5 +53,6 @@ true            false           All sites will be processed, except sites listed
 false           true            Only the sites listed in the Inclusions will be processed, it does not matter if they are in the Exclusions list
 false           false           All sites will be processed
 
-finally, if the router's external IP address is wrong, such as with a double NAT situation, you can tell the script to ignore a specific address. If it see's this as the suggested address, it will make the outbound call to get the real external address.
+Next we have the skipUpdate variable.  If you want the script to simulate an update, but not actually execute it, set the variable skipUpdate=true. Anyother value will cause the update to be carried out.
+Finally, if the router's external IP address is wrong, such as with a double NAT situation, you can tell the script to ignore a specific address. If it see's this as the suggested address, it will make the outbound call to get the real external address.
 ignoreIP="192.168.1.1"
