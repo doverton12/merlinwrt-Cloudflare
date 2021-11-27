@@ -22,3 +22,4 @@ token="API TOKEN GOES HERE"
 url="https://api.cloudflare.com/client/v4/zones"
 processExcludes=true
 processIncludes=false
+ignoreIP="192.168.0.2"
