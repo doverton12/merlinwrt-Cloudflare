@@ -54,5 +54,8 @@ false           true            Only the sites listed in the Inclusions will be 
 false           false           All sites will be processed
 
 Next we have the skipUpdate variable.  If you want the script to simulate an update, but not actually execute it, set the variable skipUpdate=true. Anyother value will cause the update to be carried out.
+
+The next variable is isRequiredCheck.  This, if set to true, will check if the DNS entry needs changing and if not, it will skip the update.  If this is set to false, then if a DNS record matches for a change, it will be updated, even if the IP address has not changed.
+
 Finally, if the router's external IP address is wrong, such as with a double NAT situation, you can tell the script to ignore a specific address. If it see's this as the suggested address, it will make the outbound call to get the real external address.
 ignoreIP="192.168.1.1"
