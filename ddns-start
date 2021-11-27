@@ -12,8 +12,6 @@ log=$(basename $0).log
 
 logandlocal "======================================================================================================================="
 logandlocal "Starting $0 script"
-logandlocal "Logfile is located at $log"
-logandlocal "Config gile is located as $config"
 logandlocal "All Parameters: $@"
 
 if [ -r $config ]; then
@@ -61,6 +59,7 @@ if [ -z "$1" ]; then
 else
     current=\"$1\"
     #is IP address one to ignore
+logandlocal "-$ignoreIP- -$1-"
     if [ -n "$ignoreIP" ]; then
         if [ "$1" == "$ignoreIP" ]; then
             current=\"`echo $(curl -s ifconfig.me || curl -s icanhazip.com)`\"
@@ -86,6 +85,7 @@ while [[ $index -lt $recordCount ]]; do
     else
         check="0"
     fi
+
     if [ $check -eq "0" ];then
         if [ "$processIncludes" == "true" ];then
             check2=`echo $sitesJSON | jq -r '.inclusions[0:][].name' | grep -i "^$recordName$" | wc -l`
@@ -106,7 +106,7 @@ while [[ $index -lt $recordCount ]]; do
             if [ "$isRequiredCheck" != "true" ]; then
                 oldIP="not a match"
             fi
-            if [ $oldIP == $current ] ;then
+            if [ "$oldIP" == "$current" ] ;then
                 logandlocal "$indexp1 The IP address for $name is already set to $current, so no change required"
             else
                 # update record ip (other values remain the same)
