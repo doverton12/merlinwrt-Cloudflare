@@ -102,11 +102,15 @@ while [[ $index -lt $recordCount ]]; do
             ttl=$(echo ${record}|jq '.result.ttl')
             proxied=$(echo ${record}|jq '.result.proxied')
             oldIP=$(echo ${record}|jq '.result.content')
+            oldIP1=$oldIP
+            if [ "$isRequiredCheck" != "true"]; then
+                oldIP="not a match"
+            fi
             if [ $oldIP == $current ] ;then
                 logandlocal "$indexp1 The IP address for $name is already set to $current, so no change required"
             else
                 # update record ip (other values remain the same)
-                logandlocal "$indexp1 Name:$name  ID:$recordID  Type:$type  TTL:$ttl  Proxied:$proxied  Old IP:$oldIP  New IP:$current"
+                logandlocal "$indexp1 Name:$name  ID:$recordID  Type:$type  TTL:$ttl  Proxied:$proxied  Old IP:$oldIP1  New IP:$current"
                 data='{"type":'"$type"',"name":'"$name"',"content":'"$current"',"ttl":'"$ttl"',"proxied":'"$proxied"'}'
                 if [ "$skipUpdate" == "true" ]; then
                     logandlocal "Command thatwould be executes" "curl -s -X PUT "${url}/${zoneID}/dns_records/${recordID}" --data $data -H "Authorization: Bearer ${token}" -H "Content-Type: application/json" | jq ."
