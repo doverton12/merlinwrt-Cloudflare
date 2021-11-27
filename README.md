@@ -4,10 +4,13 @@ This is my Cloudflare script for Dynamic DNS for use with MerlinWRT.
 
 This script tries to do a number of things for you.  You will need to configure it so that the important settings are captured from Cloudflare before you can expect it to function, either autonomously or when called by MerlinWRT firmware for routers.
 
-# Files and locations
-The configuration file goes in the same directory as the script and is called .cloudflare. This file contains any A record sites to optionally be explicitly excluded or included. This also contains the API Token and Zone ID for your Cloudflare DNS.
+## Thanks to Merlin
+I personally stick to ASUS routers because of the modifications that Merlin has made to the firmware.  Details of this product can be found at https://www.asuswrt-merlin.net/. I'd like to take this moment to say thanks to him for maintaining this software.
 
-The second file contains the script called by MerlinWRT.  If this script is called with no IP address as a parameter it will use the (curl -s ifconfig.me || curl -s icanhazip.com) to get your externally facing IP address.  It will then iterate through all the sites it finds when it connects to Cloudflare and determine if an update is required. This file should be called ddns-start and should be placed in the /jffs/scripts folder.
+# Files and locations
+The configuration file goes in the same directory as the script and is called **.ddns-cloudflare**. This file contains any A record sites to optionally be explicitly excluded or included. This also contains the API Token and Zone ID for your Cloudflare DNS.
+
+The second file contains the script called by MerlinWRT.  If this script is called with no IP address as a parameter it will use the (curl -s ifconfig.me || curl -s icanhazip.com) to get your externally facing IP address.  It will then iterate through all the sites it finds when it connects to Cloudflare and determine if an update is required. This file should be called **ddns-start** and should be placed in the /jffs/scripts folder.
 
 A log file is written with everything that is shown on the screen.  The log file will be called the same name as the script with .log appended to the end.  For me this is often found in /tmp/bwdpi/ddns-start.log
 
